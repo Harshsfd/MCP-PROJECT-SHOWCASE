@@ -1,17 +1,18 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Search, Filter, Code2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ProjectCard from "@/components/ProjectCard";
-import { mockProjects } from "@/data/mockProjects";
 import { fetchProjects, Project } from "@/lib/api";
 
 const Projects = () => {
+  const [projects, setProjects] = useState<Project[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState<string | null>(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const levels = [
     { value: "basic", label: "Basic", color: "bg-level-basic/20 text-level-basic border-level-basic/30" },
@@ -19,29 +20,46 @@ const Projects = () => {
     { value: "advanced", label: "Advanced", color: "bg-level-advanced/20 text-level-advanced border-level-advanced/30" },
   ];
 
-  const allTags = useMemo(() => {
-    const tagSet = new Set<string>();
-    mockProjects.forEach(project => {
-      project.tags.forEach(tag => tagSet.add(tag));
-    });
-    return Array.from(tagSet).sort();
+  // 🔥 Backend se projects fetch karo
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        const data = await fetchProjects(); // ye backend call karega
+        setProjects(data);
+      } catch (error) {
+        console.error("Failed to fetch projects:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProjects();
   }, []);
 
+  const allTags = useMemo(() => {
+    const tagSet = new Set<string>();
+    projects.forEach(project => {
+      if (project.tags) {
+        project.tags.forEach(tag => tagSet.add(tag));
+      }
+    });
+    return Array.from(tagSet).sort();
+  }, [projects]);
+
   const filteredProjects = useMemo(() => {
-    return mockProjects.filter(project => {
+    return projects.filter(project => {
       const matchesSearch = !searchQuery || 
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+        (project.tags && project.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())));
       
       const matchesLevel = !selectedLevel || project.level === selectedLevel;
       
       const matchesTags = selectedTags.length === 0 || 
-        selectedTags.some(tag => project.tags.includes(tag));
+        selectedTags.some(tag => project.tags?.includes(tag));
       
       return matchesSearch && matchesLevel && matchesTags;
     });
-  }, [searchQuery, selectedLevel, selectedTags]);
+  }, [projects, searchQuery, selectedLevel, selectedTags]);
 
   const toggleTag = (tag: string) => {
     setSelectedTags(prev => 
@@ -166,11 +184,13 @@ const Projects = () => {
           <div className="container mx-auto px-4">
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-semibold">
-                {filteredProjects.length} Project{filteredProjects.length !== 1 ? 's' : ''} Found
+                {loading ? "Loading..." : `${filteredProjects.length} Project${filteredProjects.length !== 1 ? 's' : ''} Found`}
               </h2>
             </div>
 
-            {filteredProjects.length > 0 ? (
+            {loading ? (
+              <p className="text-center text-muted-foreground">Fetching projects...</p>
+            ) : filteredProjects.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProjects.map((project) => (
                   <ProjectCard key={project.id} project={project} />
