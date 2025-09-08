@@ -307,6 +307,108 @@ const MCPDashboard = () => {
   },
   {
     id: "6",
+    title: "MCP AI Chatbot Integration",
+    description: "Integrate an AI chatbot with MCP for intelligent context handling",
+    fullDescription: "This project demonstrates how to connect an AI-powered chatbot to an MCP server. The chatbot can read context data, respond intelligently, and update the server with new context. Uses OpenAI API and Python asyncio for real-time interaction.",
+    level: "intermediate",
+    tags: ["Python", "AI", "Chatbot", "MCP", "OpenAI"],
+    language: "python",
+    createdAt: "2024-02-05",
+    codeSnippet: `import asyncio
+from mcp import Server, Context
+from openai import OpenAI
+
+class MCPChatbot:
+    def __init__(self, api_key):
+        self.server = Server()
+        self.context = Context()
+        self.client = OpenAI(api_key)
+    
+    async def handle_message(self, message):
+        context_data = self.context.get_relevant_info()
+        prompt = f"Context: {context_data}\\nMessage: {message}"
+        response = self.client.chat.create(prompt=prompt)
+        await self.context.update({'last_response': response['text']})
+        return response['text']`,
+    downloadUrl: "/downloads/mcp-ai-chatbot.zip",
+    githubUrl: "https://github.com/example/mcp-ai-chatbot"
+  },
+  {
+    id: "7",
+    title: "MCP Mobile Client",
+    description: "Develop a mobile client to connect and interact with MCP servers",
+    fullDescription: "A mobile application built with React Native that connects to MCP servers. It shows active contexts, allows sending updates, and handles real-time notifications. Great for monitoring MCP on-the-go.",
+    level: "intermediate",
+    tags: ["React Native", "Mobile", "MCP", "JavaScript"],
+    language: "javascript",
+    createdAt: "2024-02-10",
+    codeSnippet: `import React, { useEffect, useState } from 'react';
+import { View, Text, Button } from 'react-native';
+import io from 'socket.io-client';
+
+const MCPMobileClient = () => {
+  const [contexts, setContexts] = useState([]);
+  const socket = io('ws://localhost:8080');
+
+  useEffect(() => {
+    socket.on('context_update', (data) => {
+      setContexts(prev => [...prev, data]);
+    });
+    return () => socket.disconnect();
+  }, []);
+
+  return (
+    <View>
+      {contexts.map((c, i) => <Text key={i}>{c.contextId}: {c.data}</Text>)}
+      <Button title="Refresh" onPress={() => socket.emit('fetch_contexts')} />
+    </View>
+  );
+};
+
+export default MCPMobileClient;`,
+    downloadUrl: "/downloads/mcp-mobile-client.zip",
+    githubUrl: "https://github.com/example/mcp-mobile-client"
+  },
+  {
+    id: "8",
+    title: "MCP Cloud Deployment",
+    description: "Deploy MCP servers on AWS with auto-scaling and monitoring",
+    fullDescription: "Learn how to deploy MCP servers to the cloud using AWS services. Includes EC2 setup, auto-scaling groups, monitoring with CloudWatch, and CI/CD pipelines. Ensures scalable and highly available MCP infrastructure.",
+    level: "advanced",
+    tags: ["AWS", "Cloud", "Deployment", "MCP", "Python"],
+    language: "python",
+    createdAt: "2024-02-15",
+    codeSnippet: `import boto3
+import asyncio
+from mcp import Server
+
+class MCPCloudDeployer:
+    def __init__(self, aws_config):
+        self.ec2 = boto3.client('ec2', **aws_config)
+    
+    async def launch_instance(self, ami_id, instance_type):
+        response = self.ec2.run_instances(
+            ImageId=ami_id,
+            InstanceType=instance_type,
+            MinCount=1,
+            MaxCount=1
+        )
+        return response['Instances'][0]['InstanceId']
+    
+    async def deploy_mcp_server(self, instance_id):
+        # Connect and deploy MCP server
+        pass
+
+if __name__ == "__main__":
+    deployer = MCPCloudDeployer({'region_name': 'us-east-1'})
+    asyncio.run(deployer.launch_instance('ami-12345678', 't2.micro'))`,
+    downloadUrl: "/downloads/mcp-cloud-deployment.zip",
+    githubUrl: "https://github.com/example/mcp-cloud-deployment"
+  }
+];
+
+  {
+    id: "9",
     title: "MCP Security Implementation",
     description: "Implement authentication, authorization, and encryption for MCP communications",
     fullDescription: "Learn how to secure your MCP infrastructure with proper authentication mechanisms, role-based access control, and end-to-end encryption. This advanced project covers JWT tokens, OAuth2 integration, and secure context sharing protocols.",
