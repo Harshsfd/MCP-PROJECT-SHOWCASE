@@ -1,7 +1,6 @@
 // Backend/src/app.ts
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
-import helmet from "helmet";
 import projectsRoutes from "./routes/projects";
 import heroRoutes from "./routes/hero";
 import codeRoutes from "./routes/codeblocks";
@@ -10,9 +9,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-
-// Security headers
-app.use(helmet());
 
 // CORS: restrict to FRONTEND_URL if provided, else allow localhost:8080 (vite default)
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:8080";
