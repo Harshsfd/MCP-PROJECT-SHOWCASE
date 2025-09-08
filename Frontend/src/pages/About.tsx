@@ -1,15 +1,15 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Code2, 
-  Users, 
-  Zap, 
-  Shield, 
-  BookOpen, 
-  Github, 
-  Mail, 
-  ExternalLink 
+import {
+  Code2,
+  Users,
+  Zap,
+  Shield,
+  BookOpen,
+  Github,
+  Mail,
+  ExternalLink,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { Link } from "react-router-dom";
@@ -19,39 +19,49 @@ const About = () => {
     {
       icon: Code2,
       title: "Open Source",
-      description: "All projects are open source and available for learning and contribution."
+      description: "All projects are open source and available for learning and contribution.",
     },
     {
       icon: BookOpen,
       title: "Educational",
-      description: "Designed to teach MCP concepts from basic to advanced implementations."
+      description: "Designed to teach MCP concepts from basic to advanced implementations.",
     },
     {
       icon: Zap,
       title: "Modern Tech",
-      description: "Built with cutting-edge technologies and best practices."
+      description: "Built with cutting-edge technologies and best practices.",
     },
     {
       icon: Shield,
       title: "Production Ready",
-      description: "Includes security, performance, and scalability considerations."
+      description: "Includes security, performance, and scalability considerations.",
     },
     {
       icon: Users,
       title: "Community Driven",
-      description: "Built by developers, for developers, with community feedback."
-    }
+      description: "Built by developers, for developers, with community feedback.",
+    },
   ];
 
   const skills = [
-    "Python", "JavaScript", "React", "Node.js", "Docker", "Kubernetes",
-    "PostgreSQL", "MongoDB", "Redis", "WebSocket", "JWT", "OAuth2"
+    "Python",
+    "JavaScript",
+    "React",
+    "Node.js",
+    "Docker",
+    "Kubernetes",
+    "PostgreSQL",
+    "MongoDB",
+    "Redis",
+    "WebSocket",
+    "JWT",
+    "OAuth2",
   ];
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       <main className="pt-16">
         {/* Hero Section */}
         <section className="py-20 bg-gradient-card">
@@ -62,11 +72,11 @@ const About = () => {
                   <Code2 className="w-8 h-8 text-primary-foreground" />
                 </div>
               </div>
-              
+
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
                 About <span className="gradient-text">MCP Showcase</span>
               </h1>
-              
+
               <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
                 A comprehensive platform dedicated to showcasing Model Context Protocol (MCP) 
                 implementations, from foundational concepts to enterprise-grade solutions. 
@@ -90,7 +100,10 @@ const About = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {features.map((feature, index) => (
-                <Card key={index} className="glass-card p-6 text-center group hover:shadow-elevated transition-all duration-300">
+                <Card
+                  key={index}
+                  className="glass-card p-6 text-center group hover:shadow-elevated transition-all duration-300"
+                >
                   <div className="inline-flex p-3 rounded-full bg-gradient-primary/10 mb-4 group-hover:bg-gradient-primary/20 transition-colors">
                     <feature.icon className="w-6 h-6 text-primary" />
                   </div>
@@ -112,11 +125,11 @@ const About = () => {
                 relevance and applicability in real-world scenarios.
               </p>
             </div>
-            
+
             <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
               {skills.map((skill) => (
-                <Badge 
-                  key={skill} 
+                <Badge
+                  key={skill}
                   variant="secondary"
                   className="px-4 py-2 text-sm bg-card/50 hover:bg-primary/20 transition-colors cursor-default"
                 >
@@ -136,7 +149,7 @@ const About = () => {
                 Our projects are structured in three levels to support your learning journey
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <Card className="glass-card p-8 text-center">
                 <Badge className="bg-level-basic/20 text-level-basic border-level-basic/30 mb-4">
@@ -152,7 +165,7 @@ const About = () => {
                   <li>• Core concepts</li>
                 </ul>
               </Card>
-              
+
               <Card className="glass-card p-8 text-center">
                 <Badge className="bg-level-intermediate/20 text-level-intermediate border-level-intermediate/30 mb-4">
                   INTERMEDIATE
@@ -167,7 +180,7 @@ const About = () => {
                   <li>• Performance optimization</li>
                 </ul>
               </Card>
-              
+
               <Card className="glass-card p-8 text-center">
                 <Badge className="bg-level-advanced/20 text-level-advanced border-level-advanced/30 mb-4">
                   ADVANCED
@@ -194,24 +207,47 @@ const About = () => {
               Ready to dive into Model Context Protocol development? 
               Explore our projects and start building amazing applications.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              {/* Internal navigation */}
               <Link to="/projects">
                 <Button size="lg" className="bg-gradient-primary hover:shadow-glow">
                   <Code2 className="w-4 h-4 mr-2" />
                   Browse Projects
                 </Button>
               </Link>
-              
-              <Button variant="outline" size="lg" className="glass-card">
-                <Github className="w-4 h-4 mr-2" />
-                View on GitHub
-              </Button>
-              
-              <Button variant="outline" size="lg" className="glass-card">
-                <Mail className="w-4 h-4 mr-2" />
-                Contact Us
-              </Button>
+
+              {/* GitHub Link */}
+              <a
+                href="https://github.com/Harshsfd"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" size="lg" className="glass-card">
+                  <Github className="w-4 h-4 mr-2" />
+                  View on GitHub
+                </Button>
+              </a>
+
+              {/* LinkedIn Link */}
+              <a
+                href="https://www.linkedin.com/in/harshsfd"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" size="lg" className="glass-card">
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  LinkedIn
+                </Button>
+              </a>
+
+              {/* Email Link */}
+              <a href="mailto:harshbhardwajsfd@gmail.com">
+                <Button variant="outline" size="lg" className="glass-card">
+                  <Mail className="w-4 h-4 mr-2" />
+                  Contact Us
+                </Button>
+              </a>
             </div>
           </div>
         </section>
