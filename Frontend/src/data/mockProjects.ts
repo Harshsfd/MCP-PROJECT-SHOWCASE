@@ -18,7 +18,8 @@ export const mockProjects: Project[] = [
     id: "1",
     title: "Basic MCP Server Setup",
     description: "Learn the fundamentals of creating your first MCP server with Python",
-    fullDescription: "This project walks you through creating a basic Model Context Protocol server using Python. You'll learn how to set up the server, handle client connections, and implement basic context sharing functionality. Perfect for beginners who want to understand the core concepts of MCP.",
+    fullDescription:
+      "This project walks you through creating a basic Model Context Protocol server using Python. You'll learn how to set up the server, handle client connections, and implement basic context sharing functionality. Perfect for beginners who want to understand the core concepts of MCP.",
     level: "basic",
     tags: ["Python", "MCP", "Server", "Beginner"],
     language: "python",
@@ -49,13 +50,14 @@ if __name__ == "__main__":
     server = BasicMCPServer()
     asyncio.run(server.start())`,
     downloadUrl: "/downloads/basic-mcp-server.zip",
-    githubUrl: "https://github.com/example/basic-mcp-server"
+    githubUrl: "https://github.com/example/basic-mcp-server",
   },
   {
     id: "2",
     title: "JavaScript MCP Client",
     description: "Build a robust MCP client using modern JavaScript and WebSocket connections",
-    fullDescription: "This intermediate project demonstrates how to create a feature-rich MCP client in JavaScript. You'll implement real-time communication, context synchronization, and error handling. The project includes examples of connecting to multiple MCP servers and managing context state efficiently.",
+    fullDescription:
+      "This intermediate project demonstrates how to create a feature-rich MCP client in JavaScript. You'll implement real-time communication, context synchronization, and error handling. The project includes examples of connecting to multiple MCP servers and managing context state efficiently.",
     level: "intermediate",
     tags: ["JavaScript", "WebSocket", "Client", "Real-time"],
     language: "javascript",
@@ -106,13 +108,14 @@ if __name__ == "__main__":
   }
 }`,
     downloadUrl: "/downloads/javascript-mcp-client.zip",
-    githubUrl: "https://github.com/example/javascript-mcp-client"
+    githubUrl: "https://github.com/example/javascript-mcp-client",
   },
   {
     id: "3",
     title: "Advanced MCP Architecture",
     description: "Scalable microservices architecture with distributed MCP protocol implementation",
-    fullDescription: "An advanced implementation showcasing enterprise-grade MCP architecture. This project demonstrates how to build a scalable, distributed system with multiple MCP servers, load balancing, fault tolerance, and advanced context management. Includes Docker containers, Kubernetes configurations, and monitoring setup.",
+    fullDescription:
+      "An advanced implementation showcasing enterprise-grade MCP architecture. This project demonstrates how to build a scalable, distributed system with multiple MCP servers, load balancing, fault tolerance, and advanced context management. Includes Docker containers, Kubernetes configurations, and monitoring setup.",
     level: "advanced",
     tags: ["Microservices", "Docker", "Kubernetes", "Scalability", "Python"],
     language: "python",
@@ -144,7 +147,6 @@ class DistributedMCPServer:
     async def handle_distributed_context(self, context_data):
         """Handle context across multiple nodes"""
         with self.metrics['latency'].time():
-            # Distribute context to relevant nodes
             nodes = await self.discover_active_nodes()
             
             tasks = []
@@ -165,13 +167,14 @@ class DistributedMCPServer:
         return [pod.status.pod_ip for pod in pods.items 
                 if pod.status.phase == 'Running']`,
     downloadUrl: "/downloads/advanced-mcp-architecture.zip",
-    githubUrl: "https://github.com/example/advanced-mcp-architecture"
+    githubUrl: "https://github.com/example/advanced-mcp-architecture",
   },
   {
     id: "4",
     title: "MCP Database Integration",
     description: "Integrate MCP with various databases for persistent context storage",
-    fullDescription: "This project shows how to integrate MCP servers with different database systems including PostgreSQL, MongoDB, and Redis. Learn about context persistence, query optimization, and real-time synchronization between database state and MCP context.",
+    fullDescription:
+      "This project shows how to integrate MCP servers with different database systems including PostgreSQL, MongoDB, and Redis. Learn about context persistence, query optimization, and real-time synchronization between database state and MCP context.",
     level: "intermediate",
     tags: ["Database", "PostgreSQL", "MongoDB", "Redis", "Python"],
     language: "python",
@@ -189,49 +192,44 @@ class MCPDatabaseConnector:
         self.configs = db_configs
     
     async def initialize_connections(self):
-        # PostgreSQL connection
         self.postgres = await asyncpg.connect(
             self.configs['postgres']['url']
         )
         
-        # MongoDB connection
         self.mongo = AsyncIOMotorClient(
             self.configs['mongo']['url']
         ).mcp_database
         
-        # Redis connection
         self.redis = await aioredis.create_redis_pool(
             self.configs['redis']['url']
         )
     
     async def store_context(self, context_id, context_data):
         """Store context in multiple databases"""
-        # Store in PostgreSQL for structured queries
         await self.postgres.execute(
             "INSERT INTO contexts (id, data, created_at) VALUES ($1, $2, NOW())",
             context_id, context_data
         )
         
-        # Store in MongoDB for flexible schema
         await self.mongo.contexts.insert_one({
             "_id": context_id,
             "data": context_data,
             "timestamp": datetime.utcnow()
         })
         
-        # Cache in Redis for fast access
         await self.redis.setex(
             f"context:{context_id}", 
-            3600,  # 1 hour TTL
+            3600,
             json.dumps(context_data)
         )`,
-    downloadUrl: "/downloads/mcp-database-integration.zip"
+    downloadUrl: "/downloads/mcp-database-integration.zip",
   },
   {
     id: "5",
     title: "Real-time MCP Dashboard",
     description: "Build a React dashboard for monitoring MCP server performance and contexts",
-    fullDescription: "Create a comprehensive dashboard for monitoring MCP server metrics, active contexts, and real-time performance data. This project uses React, WebSockets, and Chart.js to provide live insights into your MCP infrastructure.",
+    fullDescription:
+      "Create a comprehensive dashboard for monitoring MCP server metrics, active contexts, and real-time performance data. This project uses React, WebSockets, and Chart.js to provide live insights into your MCP infrastructure.",
     level: "intermediate",
     tags: ["React", "Dashboard", "WebSocket", "Monitoring", "JavaScript"],
     language: "javascript",
@@ -303,13 +301,14 @@ const MCPDashboard = () => {
     </div>
   );
 };`,
-    downloadUrl: "/downloads/mcp-dashboard.zip"
+    downloadUrl: "/downloads/mcp-dashboard.zip",
   },
   {
     id: "6",
     title: "MCP AI Chatbot Integration",
     description: "Integrate an AI chatbot with MCP for intelligent context handling",
-    fullDescription: "This project demonstrates how to connect an AI-powered chatbot to an MCP server. The chatbot can read context data, respond intelligently, and update the server with new context. Uses OpenAI API and Python asyncio for real-time interaction.",
+    fullDescription:
+      "This project demonstrates how to connect an AI-powered chatbot to an MCP server. The chatbot can read context data, respond intelligently, and update the server with new context. Uses OpenAI API and Python asyncio for real-time interaction.",
     level: "intermediate",
     tags: ["Python", "AI", "Chatbot", "MCP", "OpenAI"],
     language: "python",
@@ -331,13 +330,14 @@ class MCPChatbot:
         await self.context.update({'last_response': response['text']})
         return response['text']`,
     downloadUrl: "/downloads/mcp-ai-chatbot.zip",
-    githubUrl: "https://github.com/example/mcp-ai-chatbot"
+    githubUrl: "https://github.com/example/mcp-ai-chatbot",
   },
   {
     id: "7",
     title: "MCP Mobile Client",
     description: "Develop a mobile client to connect and interact with MCP servers",
-    fullDescription: "A mobile application built with React Native that connects to MCP servers. It shows active contexts, allows sending updates, and handles real-time notifications. Great for monitoring MCP on-the-go.",
+    fullDescription:
+      "A mobile application built with React Native that connects to MCP servers. It shows active contexts, allows sending updates, and handles real-time notifications. Great for monitoring MCP on-the-go.",
     level: "intermediate",
     tags: ["React Native", "Mobile", "MCP", "JavaScript"],
     language: "javascript",
@@ -367,13 +367,14 @@ const MCPMobileClient = () => {
 
 export default MCPMobileClient;`,
     downloadUrl: "/downloads/mcp-mobile-client.zip",
-    githubUrl: "https://github.com/example/mcp-mobile-client"
+    githubUrl: "https://github.com/example/mcp-mobile-client",
   },
   {
     id: "8",
     title: "MCP Cloud Deployment",
     description: "Deploy MCP servers on AWS with auto-scaling and monitoring",
-    fullDescription: "Learn how to deploy MCP servers to the cloud using AWS services. Includes EC2 setup, auto-scaling groups, monitoring with CloudWatch, and CI/CD pipelines. Ensures scalable and highly available MCP infrastructure.",
+    fullDescription:
+      "Learn how to deploy MCP servers to the cloud using AWS services. Includes EC2 setup, auto-scaling groups, monitoring with CloudWatch, and CI/CD pipelines. Ensures scalable and highly available MCP infrastructure.",
     level: "advanced",
     tags: ["AWS", "Cloud", "Deployment", "MCP", "Python"],
     language: "python",
@@ -403,15 +404,14 @@ if __name__ == "__main__":
     deployer = MCPCloudDeployer({'region_name': 'us-east-1'})
     asyncio.run(deployer.launch_instance('ami-12345678', 't2.micro'))`,
     downloadUrl: "/downloads/mcp-cloud-deployment.zip",
-    githubUrl: "https://github.com/example/mcp-cloud-deployment"
-  }
-];
-
+    githubUrl: "https://github.com/example/mcp-cloud-deployment",
+  },
   {
     id: "9",
     title: "MCP Security Implementation",
     description: "Implement authentication, authorization, and encryption for MCP communications",
-    fullDescription: "Learn how to secure your MCP infrastructure with proper authentication mechanisms, role-based access control, and end-to-end encryption. This advanced project covers JWT tokens, OAuth2 integration, and secure context sharing protocols.",
+    fullDescription:
+      "Learn how to secure your MCP infrastructure with proper authentication mechanisms, role-based access control, and end-to-end encryption. This advanced project covers JWT tokens, OAuth2 integration, and secure context sharing protocols.",
     level: "advanced",
     tags: ["Security", "Authentication", "Encryption", "JWT", "Python"],
     language: "python",
@@ -467,23 +467,24 @@ class MCPSecurityManager:
         """Encrypt sensitive context data"""
         serialized = json.dumps(context_data).encode()
         return self.cipher.encrypt(serialized)`,
-    downloadUrl: "/downloads/mcp-security.zip"
-  }
+    downloadUrl: "/downloads/mcp-security.zip",
+  },
 ];
 
 export const getProjectById = (id: string): Project | undefined => {
-  return mockProjects.find(project => project.id === id);
+  return mockProjects.find((project) => project.id === id);
 };
 
 export const getProjectsByLevel = (level: string): Project[] => {
-  return mockProjects.filter(project => project.level === level);
+  return mockProjects.filter((project) => project.level === level);
 };
 
 export const searchProjects = (query: string): Project[] => {
   const lowerQuery = query.toLowerCase();
-  return mockProjects.filter(project => 
-    project.title.toLowerCase().includes(lowerQuery) ||
-    project.description.toLowerCase().includes(lowerQuery) ||
-    project.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
+  return mockProjects.filter(
+    (project) =>
+      project.title.toLowerCase().includes(lowerQuery) ||
+      project.description.toLowerCase().includes(lowerQuery) ||
+      project.tags.some((tag) => tag.toLowerCase().includes(lowerQuery))
   );
 };
