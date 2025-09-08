@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Protocol Forge Lab",
+    "description": "A lab for experimenting with network protocols",
+    "image": "https://via.placeholder.com/150",
+    "link": "https://github.com/user/protocol-forge-lab"
+  },
+  {
+    "id": 2,
+    "title": "React Project",
+    "description": "Frontend built with React and Tailwind",
+    "image": "https://via.placeholder.com/150",
+    "link": "#"
+  }
+]

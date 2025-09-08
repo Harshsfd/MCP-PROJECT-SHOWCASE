@@ -1,0 +1,32 @@
+protocol-forge-lab-backend/
+│
+├─ package.json
+├─ tsconfig.json
+├─ .env
+├─ .gitignore
+│
+├─ src/
+│   ├─ server.ts             # Entry point
+│   ├─ app.ts                # Express app setup
+│   │
+│   ├─ routes/
+│   │   ├─ projects.ts       # API routes for projects
+│   │   ├─ hero.ts           # API routes for hero section
+│   │   └─ codeblocks.ts     # API routes for code snippets
+│   │
+│   ├─ controllers/
+│   │   ├─ projectsController.ts
+│   │   ├─ heroController.ts
+│   │   └─ codeController.ts
+│   │
+│   ├─ models/
+│   │   ├─ project.ts        # TypeScript interface
+│   │   ├─ hero.ts
+│   │   └─ codeblock.ts
+│   │
+│   └─ data/
+│       ├─ projects.json
+│       ├─ hero.json
+│       └─ codeblocks.json
+│
+└─ README.md

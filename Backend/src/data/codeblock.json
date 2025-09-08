@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "title": "Hello World in Python",
+    "language": "python",
+    "code": "print('Hello, world!')"
+  },
+  {
+    "id": 2,
+    "title": "Simple React Component",
+    "language": "tsx",
+    "code": "const Hello = () => <h1>Hello World</h1>;"
+  }
+]
