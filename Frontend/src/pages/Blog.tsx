@@ -1,176 +1,290 @@
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Calendar, Clock, ArrowRight, BookOpen } from "lucide-react";
+import Navbar from "@/components/Navbar";
 import { Link } from "react-router-dom";
 
 const blogPosts = [
-  {
-    id: "1",
-    title: "Getting Started with Model Context Protocol",
-    description:
-      "Learn the basics of MCP and how it transforms context management in AI applications.",
-    date: "2024-01-15",
-    category: "Beginner",
-  },
-  {
-    id: "2",
-    title: "Building Your First MCP Project",
-    description:
-      "Step-by-step guide to creating your first practical application using MCP.",
-    date: "2024-02-01",
-    category: "Tutorial",
-  },
-  {
-    id: "3",
-    title: "Best Practices for MCP Integration",
-    description:
-      "Discover recommended practices and patterns for implementing MCP in real projects.",
-    date: "2024-02-15",
-    category: "Advanced",
-  },
+{
+id: "1",
+title: "Getting Started with Model Context Protocol",
+excerpt: "A comprehensive introduction to MCP concepts, architecture, and implementation patterns for modern applications.",
+category: "Tutorial",
+readTime: "8 min read",
+publishDate: "2024-01-28",
+featured: true
+},
+{
+id: "2",
+title: "Building Scalable MCP Applications",
+excerpt: "Learn advanced patterns for building production-ready MCP systems that can handle enterprise-scale workloads.",
+category: "Advanced",
+readTime: "12 min read",
+publishDate: "2024-01-25"
+},
+{
+id: "3",
+title: "MCP Security Best Practices",
+excerpt: "Essential security considerations when implementing Model Context Protocol in production environments.",
+category: "Security",
+readTime: "10 min read",
+publishDate: "2024-01-22"
+},
+{
+id: "4",
+title: "Integrating MCP with Modern Databases",
+excerpt: "Comprehensive guide to connecting your MCP servers with PostgreSQL, MongoDB, and Redis for persistent context storage.",
+category: "Integration",
+readTime: "15 min read",
+publishDate: "2024-01-20"
+},
+{
+id: "5",
+title: "Performance Optimization for MCP Systems",
+excerpt: "Techniques and strategies to optimize your MCP implementation for maximum throughput and minimal latency.",
+category: "Performance",
+readTime: "11 min read",
+publishDate: "2024-01-18"
+},
+{
+id: "6",
+title: "MCP Design Patterns and Architecture",
+excerpt: "Explore common design patterns and architectural approaches for building maintainable MCP applications.",
+category: "Architecture",
+readTime: "9 min read",
+publishDate: "2024-01-15"
+},
+{
+id: "7",
+title: "Deploying MCP on Vercel and AWS",
+excerpt: "Step-by-step guide to deploying MCP applications on popular cloud platforms like Vercel and AWS.",
+category: "Deployment",
+readTime: "13 min read",
+publishDate: "2024-01-10"
+},
+{
+id: "8",
+title: "Debugging MCP Applications",
+excerpt: "Learn effective strategies and tools for debugging MCP-based systems in development and production.",
+category: "Debugging",
+readTime: "10 min read",
+publishDate: "2024-01-07"
+},
+{
+id: "9",
+title: "MCP for Real-time Applications",
+excerpt: "How to integrate MCP into real-time systems like chat apps, multiplayer games, and IoT devices.",
+category: "Realtime",
+readTime: "14 min read",
+publishDate: "2024-01-05"
+},
+{
+id: "10",
+title: "Testing Strategies for MCP Projects",
+excerpt: "Comprehensive testing techniques to ensure reliability and stability of your MCP implementations.",
+category: "Testing",
+readTime: "12 min read",
+publishDate: "2024-01-02"
+},
+{
+id: "11",
+title: "MCP with Frontend Frameworks",
+excerpt: "Integrating MCP seamlessly with React, Next.js, and other frontend frameworks.",
+category: "Frontend",
+readTime: "9 min read",
+publishDate: "2023-12-30"
+},
+{
+id: "12",
+title: "Future of Model Context Protocol",
+excerpt: "Exploring upcoming trends, research, and innovations shaping the future of MCP.",
+category: "Insights",
+readTime: "7 min read",
+publishDate: "2023-12-25"
+}
 ];
 
-const categories = ["All", "Beginner", "Tutorial", "Advanced"];
+const categories = [
+"All",
+"Tutorial",
+"Advanced",
+"Security",
+"Integration",
+"Performance",
+"Architecture",
+"Deployment",
+"Debugging",
+"Realtime",
+"Testing",
+"Frontend",
+"Insights"
+];
 
-export default function Blog() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+const Blog = () => {
+return (
+<div className="min-h-screen bg-background">
+<Navbar />
 
-  const filteredPosts =
-    selectedCategory === "All"
-      ? blogPosts
-      : blogPosts.filter((post) => post.category === selectedCategory);
+<main className="pt-16">  
+    {/* Header */}  
+    <section className="py-16 bg-gradient-card border-b border-border/30">  
+      <div className="container mx-auto px-4 text-center">  
+        <div className="flex justify-center mb-6">  
+          <div className="p-4 rounded-full bg-gradient-primary glow-effect">  
+            <BookOpen className="w-8 h-8 text-primary-foreground" />  
+          </div>  
+        </div>  
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">  
+          <span className="gradient-text">MCP</span> Blog  
+        </h1>  
+        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">  
+          In-depth tutorials, best practices, and insights about Model Context Protocol   
+          development from our team and community contributors.  
+        </p>  
+      </div>  
+    </section>  
 
-  return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-      {/* Hero Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl font-bold mb-6 text-gray-800 dark:text-gray-100">
-            MCP Blog
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Stay updated with the latest tutorials, guides, and best practices
-            for Model Context Protocol.
-          </p>
-        </div>
-      </section>
+    {/* Categories */}  
+    <section className="py-8 border-b border-border/30">  
+      <div className="container mx-auto px-4">  
+        <div className="flex flex-wrap justify-center gap-2">  
+          {categories.map((category) => (  
+            <Badge  
+              key={category}  
+              variant={category === "All" ? "default" : "outline"}  
+              className="cursor-pointer hover:bg-primary/20 transition-colors px-4 py-2"  
+            >  
+              {category}  
+            </Badge>  
+          ))}  
+        </div>  
+      </div>  
+    </section>  
 
-      {/* Categories Filter */}
-      <section className="py-8">
-        <div className="container mx-auto px-6 flex flex-wrap justify-center gap-3">
-          {categories.map((cat) => (
-            <Badge
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 text-sm cursor-pointer transition-all ${
-                selectedCategory === cat
-                  ? "bg-blue-600 text-white dark:bg-blue-500"
-                  : "bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
-              }`}
-            >
-              {cat}
-            </Badge>
-          ))}
-        </div>
-      </section>
+    {/* Featured Post */}  
+    {blogPosts.find(post => post.featured) && (  
+      <section className="py-12">  
+        <div className="container mx-auto px-4">  
+          <div className="mb-8">  
+            <h2 className="text-2xl font-semibold mb-2">Featured Article</h2>  
+            <p className="text-muted-foreground">Don't miss our latest comprehensive guide</p>  
+          </div>  
+            
+          {(() => {  
+            const featuredPost = blogPosts.find(post => post.featured)!;  
+            return (  
+              <Card className="glass-card p-8 hover:shadow-elevated transition-all duration-300 group cursor-pointer">  
+                <div className="grid md:grid-cols-2 gap-8 items-center">  
+                  <div>  
+                    <Badge className="mb-4 bg-primary/20 text-primary border-primary/30">  
+                      Featured  
+                    </Badge>  
+                    <h3 className="text-3xl font-bold mb-4 group-hover:text-primary transition-colors">  
+                      {featuredPost.title}  
+                    </h3>  
+                    <p className="text-muted-foreground text-lg leading-relaxed mb-6">  
+                      {featuredPost.excerpt}  
+                    </p>  
+                    <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">  
+                      <div className="flex items-center gap-1">  
+                        <Calendar className="w-4 h-4" />  
+                        {new Date(featuredPost.publishDate).toLocaleDateString()}  
+                      </div>  
+                      <div className="flex items-center gap-1">  
+                        <Clock className="w-4 h-4" />  
+                        {featuredPost.readTime}  
+                      </div>  
+                      <Badge variant="outline">{featuredPost.category}</Badge>  
+                    </div>  
+                    <Button className="bg-gradient-primary hover:shadow-glow group">  
+                      Read Article  
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />  
+                    </Button>  
+                  </div>  
+                  <div className="h-64 bg-gradient-card rounded-lg flex items-center justify-center">  
+                    <BookOpen className="w-16 h-16 text-muted-foreground" />  
+                  </div>  
+                </div>  
+              </Card>  
+            );  
+          })()}  
+        </div>  
+      </section>  
+    )}  
 
-      {/* Featured Post */}
-      <section className="py-12">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 text-center mb-12">
-            Featured Post
-          </h2>
-          <Card className="max-w-3xl mx-auto hover:shadow-xl transition-all duration-300 dark:bg-gray-800">
-            <CardContent className="p-6">
-              <h3 className="text-2xl font-semibold mb-3 text-gray-800 dark:text-gray-100">
-                {blogPosts[0].title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                {blogPosts[0].description}
-              </p>
-              <div className="flex justify-between items-center">
-                <Badge className="bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300">
-                  {blogPosts[0].category}
-                </Badge>
-                <Link to={`/blog/${blogPosts[0].id}`}>
-                  <Button
-                    variant="outline"
-                    className="dark:border-gray-400 dark:text-gray-100"
-                  >
-                    Read More
-                  </Button>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
+    {/* All Posts */}  
+    <section className="py-12">  
+      <div className="container mx-auto px-4">  
+        <h2 className="text-2xl font-semibold mb-8">All Articles</h2>  
+          
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">  
+          {blogPosts.filter(post => !post.featured).map((post) => (  
+            <Card   
+              key={post.id}   
+              className="glass-card overflow-hidden group hover:shadow-elevated transition-all duration-300 cursor-pointer"  
+            >  
+              <div className="h-48 bg-gradient-card flex items-center justify-center border-b border-border/30">  
+                <BookOpen className="w-12 h-12 text-muted-foreground" />  
+              </div>  
+                
+              <div className="p-6">  
+                <Badge   
+                  variant="outline"   
+                  className="mb-3 text-xs"  
+                >  
+                  {post.category}  
+                </Badge>  
+                  
+                <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2">  
+                  {post.title}  
+                </h3>  
+                  
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">  
+                  {post.excerpt}  
+                </p>  
+                  
+                <div className="flex items-center justify-between text-xs text-muted-foreground">  
+                  <div className="flex items-center gap-1">  
+                    <Calendar className="w-3 h-3" />  
+                    {new Date(post.publishDate).toLocaleDateString()}  
+                  </div>  
+                  <div className="flex items-center gap-1">  
+                    <Clock className="w-3 h-3" />  
+                    {post.readTime}  
+                  </div>  
+                </div>  
+              </div>  
+            </Card>  
+          ))}  
+        </div>  
+      </div>  
+    </section>  
 
-      {/* All Articles */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 text-center mb-12">
-            All Articles
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {filteredPosts.map((post) => (
-              <Card
-                key={post.id}
-                className="hover:shadow-xl transition-all duration-300 dark:bg-gray-700"
-              >
-                <CardContent className="p-6 flex flex-col justify-between h-full">
-                  <div>
-                    <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-100">
-                      {post.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      {post.description}
-                    </p>
-                  </div>
-                  <div className="flex justify-between items-center mt-auto">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      {post.date}
-                    </span>
-                    <Link to={`/blog/${post.id}`}>
-                      <Button
-                        variant="outline"
-                        className="dark:border-gray-400 dark:text-gray-100"
-                      >
-                        Read
-                      </Button>
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+    {/* Newsletter CTA */}  
+    <section className="py-16 bg-gradient-card border-t border-border/30">  
+      <div className="container mx-auto px-4 text-center">  
+        <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>  
+        <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">  
+          Get notified when we publish new MCP tutorials, guides, and insights.   
+          Join our growing community of developers.  
+        </p>  
+        <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">  
+          <input  
+            type="email"  
+            placeholder="Enter your email"  
+            className="flex-1 px-4 py-2 rounded-lg bg-card/50 border border-border/30 focus:outline-none focus:ring-2 focus:ring-primary"  
+          />  
+          <Button className="bg-gradient-primary hover:shadow-glow">  
+            Subscribe  
+          </Button>  
+        </div>  
+      </div>  
+    </section>  
+  </main>  
+</div>
 
-      {/* Newsletter CTA */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="container mx-auto px-6 text-center text-white">
-          <h2 className="text-3xl font-bold mb-6">Subscribe to Our Newsletter</h2>
-          <p className="text-lg mb-8 text-blue-100 max-w-2xl mx-auto">
-            Get the latest MCP tutorials, guides, and updates delivered straight
-            to your inbox.
-          </p>
-          <div className="flex flex-col md:flex-row justify-center gap-4 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="px-4 py-3 rounded-lg w-full md:w-2/3 text-gray-900 focus:outline-none"
-            />
-            <Button
-              size="lg"
-              className="bg-white text-blue-600 hover:bg-gray-100"
-            >
-              Subscribe
-            </Button>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-}
+);
+};
+
+export default Blog;
