@@ -1,147 +1,123 @@
-import { Link } from "react-router-dom";
-import { Card, CardContent } from "@/components/ui/card";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import ProjectCard from "@/components/ProjectCard";
 import { Button } from "@/components/ui/button";
+import { ArrowRight, Zap, Shield, Code2 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { mockProjects } from "@/data/mockProjects";
 
+const Index = () => {
+const featuredProjects = mockProjects.slice(0, 6);
 
-const featuredProjects = [
-  {
-    id: "1",
-    title: "MCP Calculator",
-    description:
-      "A simple calculator built using Model Context Protocol to demonstrate basic integration.",
-    difficulty: "Beginner",
-  },
-  {
-    id: "2",
-    title: "MCP Notes App",
-    description:
-      "A notes application showcasing CRUD operations with MCP implementation.",
-    difficulty: "Intermediate",
-  },
-  {
-    id: "3",
-    title: "MCP Chat App",
-    description:
-      "A real-time chat application built on top of MCP for advanced concepts.",
-    difficulty: "Advanced",
-  },
-];
+return (
+<div className="min-h-screen bg-background">
+<Navbar />
+<Hero />
 
-export default function Index() {
-  return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-      {/* Hero Section */}
-      <HeroSection />
+{/* Featured Projects */}  
+  <section className="py-20 border-t border-border/30">  
+    <div className="container mx-auto px-4">  
+      <div className="text-center mb-16">  
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">  
+          Featured <span className="gradient-text">Projects</span>  
+        </h2>  
+        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">  
+          Explore our handpicked selection of MCP implementations across all skill levels  
+        </p>  
+      </div>  
 
-      {/* Featured Projects */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-gray-100 mb-12">
-            Featured Projects
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {featuredProjects.map((project) => (
-              <Card
-                key={project.id}
-                className="hover:shadow-xl hover:-translate-y-1 transition-all duration-300 dark:bg-gray-700"
-              >
-                <CardContent className="p-6 flex flex-col justify-between h-full">
-                  <div>
-                    <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-100">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      {project.description}
-                    </p>
-                  </div>
-                  <div className="flex justify-between items-center mt-auto">
-                    <span className="px-3 py-1 text-sm rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300">
-                      {project.difficulty}
-                    </span>
-                    <Link to={`/projects/${project.id}`}>
-                      <Button
-                        variant="outline"
-                        className="dark:border-gray-400 dark:text-gray-100"
-                      >
-                        View
-                      </Button>
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">  
+        {featuredProjects.map((project) => (  
+          <ProjectCard key={project.id} project={project} />  
+        ))}  
+      </div>  
 
-      {/* Why Learn MCP */}
-      <section className="py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-12">
-            Why Learn MCP?
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Hands-on Learning",
-                desc: "Build real projects as you learn MCP concepts step by step.",
-              },
-              {
-                title: "Progressive Difficulty",
-                desc: "Projects range from beginner to advanced, matching your pace.",
-              },
-              {
-                title: "Open Source",
-                desc: "All projects and resources are open source and free to use.",
-              },
-            ].map((item, i) => (
-              <Card
-                key={i}
-                className="hover:shadow-xl transition-all duration-300 dark:bg-gray-700"
-              >
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-100">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300">{item.desc}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <div className="text-center">  
+        <Link to="/projects">  
+          <Button size="lg" variant="outline" className="glass-card hover:bg-card/50 group">  
+            View All Projects  
+            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />  
+          </Button>  
+        </Link>  
+      </div>  
+    </div>  
+  </section>  
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="container mx-auto px-6 text-center text-white">
-          <h2 className="text-3xl font-bold mb-6">
-            Ready to Start Your MCP Journey?
-          </h2>
-          <p className="text-lg mb-8 text-blue-100">
-            Explore hands-on projects, improve your skills, and become MCP
-            proficient.
-          </p>
-          <div className="flex flex-col md:flex-row justify-center gap-4">
-            <Link to="/projects">
-              <Button
-                size="lg"
-                className="bg-white text-blue-600 hover:bg-gray-100"
-              >
-                Start Learning
-              </Button>
-            </Link>
-            <Link to="/about">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white/10"
-              >
-                Learn More
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-}
+  {/* Why Choose MCP Section */}  
+  <section className="py-20 bg-gradient-card/50">  
+    <div className="container mx-auto px-4">  
+      <div className="text-center mb-16">  
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">  
+          Why Learn <span className="gradient-text">MCP</span>?  
+        </h2>  
+        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">  
+          Model Context Protocol is revolutionizing how applications share and manage context  
+        </p>  
+      </div>  
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">  
+        <div className="text-center">  
+          <div className="inline-flex p-4 rounded-full bg-gradient-primary/10 mb-6 glow-effect">  
+            <Zap className="w-8 h-8 text-primary" />  
+          </div>  
+          <h3 className="text-xl font-semibold mb-3">High Performance</h3>  
+          <p className="text-muted-foreground">  
+            Optimized for real-time applications with minimal latency and maximum throughput  
+          </p>  
+        </div>  
+
+        <div className="text-center">  
+          <div className="inline-flex p-4 rounded-full bg-gradient-primary/10 mb-6 glow-effect">  
+            <Shield className="w-8 h-8 text-primary" />  
+          </div>  
+          <h3 className="text-xl font-semibold mb-3">Enterprise Ready</h3>  
+          <p className="text-muted-foreground">  
+            Built-in security, scalability, and reliability features for production deployments  
+          </p>  
+        </div>  
+
+        <div className="text-center">  
+          <div className="inline-flex p-4 rounded-full bg-gradient-primary/10 mb-6 glow-effect">  
+            <Code2 className="w-8 h-8 text-primary" />  
+          </div>  
+          <h3 className="text-xl font-semibold mb-3">Developer Friendly</h3>  
+          <p className="text-muted-foreground">  
+            Clean APIs, comprehensive documentation, and extensive tooling support  
+          </p>  
+        </div>  
+      </div>  
+    </div>  
+  </section>  
+
+  {/* CTA Section */}  
+  <section className="py-20 border-t border-border/30">  
+    <div className="container mx-auto px-4 text-center">  
+      <h2 className="text-3xl md:text-4xl font-bold mb-4">  
+        Ready to Start Building?  
+      </h2>  
+      <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">  
+        Join thousands of developers already building amazing applications with MCP  
+      </p>  
+        
+      <div className="flex flex-col sm:flex-row gap-4 justify-center">  
+        <Link to="/projects">  
+          <Button size="lg" className="bg-gradient-primary hover:shadow-glow px-8 py-4 text-lg">  
+            <Code2 className="w-5 h-5 mr-2" />  
+            Start Learning  
+          </Button>  
+        </Link>  
+          
+        <Link to="/about">  
+          <Button size="lg" variant="outline" className="glass-card hover:bg-card/50 px-8 py-4 text-lg">  
+            Learn More  
+          </Button>  
+        </Link>  
+      </div>  
+    </div>  
+  </section>  
+</div>
+
+);
+};
+
+export default Index;
