@@ -54,10 +54,72 @@ const blogPosts = [
     category: "Architecture",
     readTime: "9 min read",
     publishDate: "2024-01-15"
+  },
+  {
+    id: "7",
+    title: "Deploying MCP on Vercel and AWS",
+    excerpt: "Step-by-step guide to deploying MCP applications on popular cloud platforms like Vercel and AWS.",
+    category: "Deployment",
+    readTime: "13 min read",
+    publishDate: "2024-01-10"
+  },
+  {
+    id: "8",
+    title: "Debugging MCP Applications",
+    excerpt: "Learn effective strategies and tools for debugging MCP-based systems in development and production.",
+    category: "Debugging",
+    readTime: "10 min read",
+    publishDate: "2024-01-07"
+  },
+  {
+    id: "9",
+    title: "MCP for Real-time Applications",
+    excerpt: "How to integrate MCP into real-time systems like chat apps, multiplayer games, and IoT devices.",
+    category: "Realtime",
+    readTime: "14 min read",
+    publishDate: "2024-01-05"
+  },
+  {
+    id: "10",
+    title: "Testing Strategies for MCP Projects",
+    excerpt: "Comprehensive testing techniques to ensure reliability and stability of your MCP implementations.",
+    category: "Testing",
+    readTime: "12 min read",
+    publishDate: "2024-01-02"
+  },
+  {
+    id: "11",
+    title: "MCP with Frontend Frameworks",
+    excerpt: "Integrating MCP seamlessly with React, Next.js, and other frontend frameworks.",
+    category: "Frontend",
+    readTime: "9 min read",
+    publishDate: "2023-12-30"
+  },
+  {
+    id: "12",
+    title: "Future of Model Context Protocol",
+    excerpt: "Exploring upcoming trends, research, and innovations shaping the future of MCP.",
+    category: "Insights",
+    readTime: "7 min read",
+    publishDate: "2023-12-25"
   }
 ];
 
-const categories = ["All", "Tutorial", "Advanced", "Security", "Integration", "Performance", "Architecture"];
+const categories = [
+  "All", 
+  "Tutorial", 
+  "Advanced", 
+  "Security", 
+  "Integration", 
+  "Performance", 
+  "Architecture",
+  "Deployment",
+  "Debugging",
+  "Realtime",
+  "Testing",
+  "Frontend",
+  "Insights"
+];
 
 const Blog = () => {
   return (
