@@ -50,26 +50,27 @@ const Projects = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted">
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 py-12">
+        {/* Header */}
         <div className="flex flex-col items-center text-center mb-12">
           <div className="flex items-center gap-2 mb-4">
             <Code2 className="h-8 w-8 text-primary" />
-            <h1 className="text-4xl font-bold text-gray-900">Project Showcase</h1>
+            <h1 className="text-4xl font-bold text-foreground">Project Showcase</h1>
           </div>
-          <p className="text-lg text-gray-600 max-w-2xl">
+          <p className="text-lg text-muted-foreground max-w-2xl">
             Explore curated projects with filters for level and technology.
           </p>
         </div>
 
         {/* Search + Filter Bar */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-10">
+        <div className="bg-card rounded-2xl shadow-sm border border-border p-6 mb-10">
           <div className="flex flex-col md:flex-row gap-4 md:items-center">
             {/* Search Input */}
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-5 w-5" />
               <Input
                 type="text"
                 placeholder="Search projects..."
@@ -119,8 +120,8 @@ const Projects = () => {
                 onClick={() => toggleTag(tag)}
                 className={`cursor-pointer transition ${
                   selectedTags.includes(tag)
-                    ? "bg-primary text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted text-muted-foreground hover:bg-accent"
                 }`}
               >
                 {tag}
@@ -137,12 +138,12 @@ const Projects = () => {
             ))}
           </div>
         ) : (
-          <div className="text-center py-20 bg-white rounded-2xl shadow-sm border border-gray-200">
-            <Filter className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">
+          <div className="text-center py-20 bg-card rounded-2xl shadow-sm border border-border">
+            <Filter className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+            <h3 className="text-xl font-semibold text-foreground mb-2">
               No projects found
             </h3>
-            <p className="text-gray-500">
+            <p className="text-muted-foreground">
               Try adjusting your search or filters.
             </p>
           </div>
